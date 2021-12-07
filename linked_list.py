@@ -4,6 +4,9 @@ class Node:
         self.prev = None
         self.value = value
 
+    def is_empty(self) :
+        return (self.next == None) and (self.prev == None) and (self.value == '')
+
 class LinkedList:
     def __init__(self):
         self.nhead = Node('')
@@ -22,13 +25,28 @@ class LinkedList:
         self.nhead = node
 
     def is_empty(self):
-        pass
+        return self.nhead.is_empty() and self.ntail.is_empty()
 
     def head(self):
         return self.nhead
 
     def tail(self):
         return self.ntail
+
+    def find(self, valor):
+        atual = self.nhead
+
+        if (atual.value == valor):
+            return True
+
+        while atual.next != None:
+            if (atual.value == valor):
+                return True
+
+            atual = atual.next
+
+        return False
+
 
 import unittest
 
@@ -59,6 +77,20 @@ class LinkedListTests(unittest.TestCase):
         self.assertEqual(
             'head',
             self.linked_list.head().value
+        )
+
+
+    def test_find(self):
+        self.linked_list.insert_node_to_tail(Node('tail1'))
+        self.linked_list.insert_node_to_tail(Node('tail2'))
+        self.linked_list.insert_node_to_tail(Node('tail3'))
+
+        self.assertFalse(            
+            self.linked_list.find('nada')
+        )
+
+        self.assertTrue(            
+            self.linked_list.find('tail2')
         )
 
 print('Iniciando script')
