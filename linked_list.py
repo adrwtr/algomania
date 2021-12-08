@@ -13,8 +13,8 @@ class LinkedList:
         self.ntail = None        
 
     def iniciaLista(self):
-        self.ntail = Node('')
-        self.nhead = Node('')
+        self.ntail = Node(None)
+        self.nhead = Node(None)
         self.nhead.next = self.ntail
         self.ntail.prev = self.nhead
 
@@ -63,6 +63,17 @@ class LinkedList:
 
         return False
 
+    def is_circular(self):
+        atual = self.nhead
+        if (atual == None):
+            return False
+
+        while atual.next != None:
+            if (atual.next == self.nhead):
+                return True
+            atual = atual.next
+        return False
+
 
 import unittest
 
@@ -109,9 +120,74 @@ class LinkedListTests(unittest.TestCase):
             self.linked_list.find('tail2')
         )
 
-    def is_empty_with_empty_linked_list(self):
+    def test_is_empty_with_empty_linked_list(self):
         self.assertTrue(self.linked_list.is_empty())
+
+    def test_is_circular(self):
+        self.assertFalse(self.linked_list.is_circular())
+        self.linked_list.insert_node_to_tail(Node('tail1'))
+        self.linked_list.insert_node_to_tail(Node('tail2'))
+        self.linked_list.insert_node_to_tail(Node('tail3'))
+        
+        self.assertFalse(self.linked_list.is_circular())
+
+        self.linked_list.ntail.next = self.linked_list.nhead
+        self.assertTrue(self.linked_list.is_circular())
+        print(self.linked_list)
 
 
 print('Iniciando script')
 unittest.main()
+
+
+
+
+
+""" --> codigo original para busca futura
+class Node:
+    def __init__(self, value):
+        self.next = None
+        self.value = value
+
+
+class LinkedList:
+    def __init__(self):
+        self._head = Node(None)
+
+    def insert_node_to_tail(self, node):
+        self.tail().next = node
+
+    def insert_node_to_head(self, node):
+        if self._head.next:
+            head_element = self._head
+            node.next, head_element.next = head_element.next, node
+        self._head.next = node
+
+    def is_empty(self):
+        return self._head.next is None
+
+    def head(self):
+        return self._head.next
+
+    def tail(self):
+        current = self._head
+        while current.next:
+            current = current.next
+        return current
+"""
+
+"""
+Codigo original para desafio > detect-circular-linked-list
+
+def solution(linked_list):
+    atual = linked_list.head()
+    
+    if (atual == None):
+        return False
+
+    while atual.next != None:
+        if (atual.next == linked_list.head()):
+            return True
+        atual = atual.next
+    return False
+"""    

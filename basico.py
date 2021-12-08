@@ -9,6 +9,8 @@ dois, valores = "teste", "outro"
 
 arrNumeros = [10, 20, 50]
 
+arrValores = [1, 2, 3, 4, 5]
+
 arrString = ["adriano", "waltrick"]
 
 print(nr_numero)
@@ -38,3 +40,10 @@ print(arrString)
 print(ds_enter)
 
 print(dois, valores)
+print(ds_enter)
+
+# nao faz a quebra de linha e imprime com um espaço ao final
+print(1, end=' ')
+print(2, end=' ')
+print(3, end=' ')
+print(ds_enter)
