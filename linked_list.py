@@ -9,29 +9,45 @@ class Node:
 
 class LinkedList:
     def __init__(self):
-        self.nhead = Node('')
+        self.nhead = None
+        self.ntail = None        
+
+    def iniciaLista(self):
         self.ntail = Node('')
+        self.nhead = Node('')
         self.nhead.next = self.ntail
         self.ntail.prev = self.nhead
 
     def insert_node_to_tail(self, node):
+        if (self.ntail == None):
+            self.iniciaLista()            
+
         self.ntail.next = node
         node.prev = self.ntail
         self.ntail = node
 
     def insert_node_to_head(self, node):
+        if (self.nhead == None):
+            self.iniciaLista()            
+
         self.nhead.prev = node
         node.next = self.nhead
         self.nhead = node
 
     def is_empty(self):
+        if (self.nhead == None):
+            return True
+        
+        if (self.ntail == None):
+            return True
+
         return self.nhead.is_empty() and self.ntail.is_empty()
 
     def head(self):
         return self.nhead
 
     def tail(self):
-        return self.ntail
+        return self.ntail    
 
     def find(self, valor):
         atual = self.nhead
@@ -92,6 +108,10 @@ class LinkedListTests(unittest.TestCase):
         self.assertTrue(            
             self.linked_list.find('tail2')
         )
+
+    def is_empty_with_empty_linked_list(self):
+        self.assertTrue(self.linked_list.is_empty())
+
 
 print('Iniciando script')
 unittest.main()

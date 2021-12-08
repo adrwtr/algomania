@@ -98,4 +98,3 @@ print(lista3)
 print(arrNumeros)
 arrNumeros[0], arrNumeros[1] = arrNumeros[1], arrNumeros[0]
 print(arrNumeros)
-
