@@ -24,54 +24,51 @@ Entrada: ')[('
 Saída: False
 '''
 
+class Operadores:
+    def __init__(self, ds_operador) -> None:
+        self.ds_operador = ds_operador
+        self.arrPilha = []
+    
 class Verificador:
     def __init__(self):
-        self.nr_colchete = 0
-        self.nr_parentes = 0
-        self.nr_chaves = 0
-        self.ds_anterior = ""
-    
-    def contarValores(self, string):
-        for letra in string:
-            if (letra in ["["]):
-                self.nr_colchete += 1                
-            if (letra in ["]"] and self.ds_anterior == "["):
-                self.nr_colchete += 1
-            if (letra in ["("]):
-                self.nr_parentes += 1
-            if (letra in [")"] and self.ds_anterior == "("):
-                self.nr_parentes += 1
-            if (letra in ["{"]):
-                self.nr_chaves += 1
-            if (letra in ["}"] and self.ds_anterior == "{"):
-                self.nr_chaves += 1
-            self.ds_anterior = letra
+        self.arrPilhaInicial = []
 
     def verificar(self, string):
-        self.__init__();
-        print(string + " = ")
-        self.contarValores(string)        
-        if (self.nr_colchete == 0 and self.nr_parentes == 0 and self.nr_chaves  == 0):
-            return False
+        self.__init__()
 
-        return self.nr_colchete % 2 == 0 and self.nr_parentes % 2 == 0 and self.nr_chaves % 2 == 0 
-
+        for s in string:
+            if (s in ["[", "(", "{"]):
+                self.arrPilhaInicial.append(Operadores(s))
+            if (s == "]"):           
+                if (len(self.arrPilhaInicial) > 0 and self.arrPilhaInicial[-1].ds_operador == "[") :
+                    self.arrPilhaInicial.pop()
+            if (s == ")"):           
+                if (len(self.arrPilhaInicial) > 0 and self.arrPilhaInicial[-1].ds_operador == "(") :
+                    self.arrPilhaInicial.pop()
+            if (s == "}"):           
+                if (len(self.arrPilhaInicial) > 0 and self.arrPilhaInicial[-1].ds_operador == "{") :
+                    self.arrPilhaInicial.pop()
+        if (len(self.arrPilhaInicial) == 0):
+            return True
+        return False
+                    
+                
 
 def solution(str_to_validate):
     objVerificador = Verificador()
     return objVerificador.verificar(str_to_validate)
 
 arrString = [
-    "[]", # true
-    "[[]", # false
-    "[[()]]",# true
-    "[[(]]", # false
-    "((()))", # true
-    "((())", # false
+    # "[]", # true
+    # "[[]", # false
+    # "[[()]]",# true
+    # "[[(]]", # false
+    # "((()))", # true
+    # "((())", # false
     "][", # false
     "]", # false
-    "{[{{}}]}",
-    "{{" # false
+    #"{[{{}}]}", true
+    #"{{" # false
 ]
 
 objVerificador = Verificador()
