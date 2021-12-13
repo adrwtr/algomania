@@ -29,20 +29,31 @@ class Verificador:
         self.nr_colchete = 0
         self.nr_parentes = 0
         self.nr_chaves = 0
+        self.ds_anterior = ""
     
     def contarValores(self, string):
         for letra in string:
-            if (letra in ["[", "]"]):
+            if (letra in ["["]):
+                self.nr_colchete += 1                
+            if (letra in ["]"] and self.ds_anterior == "["):
                 self.nr_colchete += 1
-            if (letra in ["(", ")"]):
+            if (letra in ["("]):
                 self.nr_parentes += 1
-            if (letra in ["{", "}"]):
+            if (letra in [")"] and self.ds_anterior == "("):
+                self.nr_parentes += 1
+            if (letra in ["{"]):
                 self.nr_chaves += 1
+            if (letra in ["}"] and self.ds_anterior == "{"):
+                self.nr_chaves += 1
+            self.ds_anterior = letra
 
     def verificar(self, string):
         self.__init__();
         print(string + " = ")
         self.contarValores(string)        
+        if (self.nr_colchete == 0 and self.nr_parentes == 0 and self.nr_chaves  == 0):
+            return False
+
         return self.nr_colchete % 2 == 0 and self.nr_parentes % 2 == 0 and self.nr_chaves % 2 == 0 
 
 
@@ -57,8 +68,10 @@ arrString = [
     "[[(]]", # false
     "((()))", # true
     "((())", # false
-    "][",
-    "{[{{}}]}"
+    "][", # false
+    "]", # false
+    "{[{{}}]}",
+    "{{" # false
 ]
 
 objVerificador = Verificador()
