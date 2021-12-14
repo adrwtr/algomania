@@ -56,23 +56,45 @@ class Verificador:
 
 def solution(str_to_validate):
     objVerificador = Verificador()
-    return objVerificador.verificar(str_to_validate)
+    # return objVerificador.verificar(str_to_validate)
+    solucao_portal(str_to_validate)
+
+    
 
 arrString = [
-     "[]", # true
-     "[[]", # false
-     "[[()]]",# true
-     "[[(]]", # false
-     "((()))", # true
-     "((())", # false
-    "][", # false
-    "]", # false
+    "[]", # true     
+    "[[()]]",# true     
+    "((()))", # true     
     "{[{{}}]}", # true
     "{{", # false
-    "{"
+    "{", # false
+    "((())", # false
+    "[[(]]", # false
+    "[[]", # false
+    "][", # false
+    "]", # false
 ]
 
 objVerificador = Verificador()
 
 for s in arrString:
     print(objVerificador.verificar(s))
+
+
+def solucao_portal(str_to_validade):
+    stack = []
+
+    mapping = {
+        ')' : '(',
+        ']' : '[',
+        '}' : '{',
+    }
+
+    # O(n)
+    for s in str_to_validade:
+        if s in mapping:
+            if len(stack) and mapping[s] == stack.pop():
+                continue
+        stack.append(s)
+
+    return len(stack) == 0
