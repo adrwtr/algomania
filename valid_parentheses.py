@@ -48,7 +48,7 @@ class Verificador:
             if (s == "}"):           
                 if (len(self.arrPilhaInicial) > 0 and self.arrPilhaInicial[-1].ds_operador == "{") :
                     self.arrPilhaInicial.pop()
-        if (len(self.arrPilhaInicial) == 0):
+        if (len(self.arrPilhaInicial) == 0 and len(string) >= 2):
             return True
         return False
                     
@@ -59,16 +59,17 @@ def solution(str_to_validate):
     return objVerificador.verificar(str_to_validate)
 
 arrString = [
-    # "[]", # true
-    # "[[]", # false
-    # "[[()]]",# true
-    # "[[(]]", # false
-    # "((()))", # true
-    # "((())", # false
+     "[]", # true
+     "[[]", # false
+     "[[()]]",# true
+     "[[(]]", # false
+     "((()))", # true
+     "((())", # false
     "][", # false
     "]", # false
-    #"{[{{}}]}", true
-    #"{{" # false
+    "{[{{}}]}", # true
+    "{{", # false
+    "{"
 ]
 
 objVerificador = Verificador()
