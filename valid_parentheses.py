@@ -57,7 +57,7 @@ class Verificador:
 def solution(str_to_validate):
     objVerificador = Verificador()
     # return objVerificador.verificar(str_to_validate)
-    solucao_portal(str_to_validate)
+    return solucao_portal(str_to_validate)
 
     
 
