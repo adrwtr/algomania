@@ -30,7 +30,7 @@ print("\n")
 print_reverd_linked_list(linked_list)
 
 
-'''
+
 import unittest
 
 
@@ -44,4 +44,4 @@ class LinkedListTests(unittest.TestCase):
         self.linked_list.insert_node_to_tail(Node('3'))
 
         print_linked_list(self.linked_list)
-'''
+        self.assertEqual(False, True)
