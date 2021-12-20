@@ -57,3 +57,32 @@ for value in arrValores:
     objHeap.add(value)
 
 objHeap.printA()
+
+
+
+
+# biblioteca nativa
+
+import heapq
+
+heap = [1, 2, 65, 98, 13, 5, 8, 3, 99]
+print(heap)
+
+# converte para heap
+heapq.heapify(heap)
+print(heap)
+
+# pega 3 maiores
+print(heapq.nlargest(3, heap))
+
+# pega 3 menores
+print(heapq.nsmallest(3, heap))
+
+# adiciona 
+heapq.heappush(heap, 10)
+
+print(heap)
+
+# remove o primeiro
+print(heapq.heappop(heap))
+print(heap)
