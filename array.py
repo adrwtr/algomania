@@ -11,6 +11,9 @@ print(arrNumeros[1])
 print(arrNumeros[-1]) # acessa ultimo elemento
 print(arrNumeros[1:3])
 
+for idx, val in enumerate(arrDesordem):
+    print(idx, val)
+
 # qtd valores
 print(len(arrNumeros))
 
