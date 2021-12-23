@@ -33,3 +33,8 @@ print(loren[0:10])
 
 # inverte a string
 print(nome[::-1])
+
+for char in reversed(range(len(nome))):
+    print(nome[char])
+
+print(','.join(nome))
