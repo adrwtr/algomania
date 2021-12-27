@@ -7,10 +7,10 @@ def solution(root):
         return 0
 
     if root.left == None and root.right == None:
-        return 0
+        return 1
     else:
-        resultado = contadorDeep(root.left, root.right, contador, contador)
-        # resultado = bsfTest(root.left, root.right)
+        # resultado = contadorDeep(root.left, root.right, contador, contador)
+        resultado = bsfTest(root.left, root.right)
 
         menor = 99
         for i in resultado:
@@ -96,6 +96,25 @@ def bsfTest(tree1, tree2):
     return (contadorl, contadorr)
 
 
+
+def solutionA(root):
+    if root:
+        q = [(root, 1)]
+        while q:
+            node, level = q.pop(0)
+
+            if node.left is None and node.right is None:
+                return level
+            
+            level += 1
+
+            if node.left:
+                q.append((node.left, level))
+
+            if node.right:
+                q.append((node.right, level))
+
+    return 0
 
 
 arvoreZero = BinaryTree()
@@ -198,7 +217,7 @@ import unittest
 class LinkedListTests(unittest.TestCase):    
     def test_normal(self):
         self.assertEqual(
-            0, 
+            1, 
             solution(arvoreZero)            
         )
 
@@ -238,7 +257,7 @@ class LinkedListTests(unittest.TestCase):
         )
 
         self.assertEqual(
-            3,
+            4,
             solution(arvoreNoneRR)
         )
 
