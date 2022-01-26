@@ -10,6 +10,10 @@ print(
     loren.replace('ipsum', 'outra coisa')
 )
 
+print(
+    len("teste")
+)
+
 # to upper
 print(
     'adriano'.upper()
@@ -38,3 +42,7 @@ for char in reversed(range(len(nome))):
     print(nome[char])
 
 print(','.join(nome))
+
+
+novoNome = "adriano"
+print(novoNome[1:])
