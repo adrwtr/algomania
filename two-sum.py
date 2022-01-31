@@ -5,6 +5,7 @@ import operator
 
 def solution(numbers, target_sum):
     myhash = {}
+    numbers.sort()
     for i in numbers:
         for a in numbers:
             myhash[i + a] = [i, a]
